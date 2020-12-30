@@ -22,26 +22,17 @@ public class FileUtil {
 	
 	public static List<String> getFileList(String pathName){
 		ArrayList<String> fileList = new ArrayList<String>();
-		BufferedReader br = null;
-		try{
-			FileInputStream in = new FileInputStream(pathName);
+		try(FileInputStream in = new FileInputStream(pathName)){
 			InputStreamReader isr = new InputStreamReader(in, "utf-8");
-			br = new BufferedReader(isr);
+			BufferedReader br = new BufferedReader(isr);
 			String line = "";
 			while(null != (line = br.readLine())){
 				if(StringUtils.isNotBlank(line)){
-					fileList.add(line);
+					fileList.add(line.replaceAll("/", "\\\\"));
 				}
 			}
 		}catch (Exception e){
 			log.info("读取路径文件出错");
-		}finally {
-			try {
-				if(null != br){
-					br.close();
-				}
-			} catch (IOException e) {
-			}
 		}
 		return fileList;
 	}
