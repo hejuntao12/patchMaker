@@ -17,7 +17,7 @@ public class ReplaceRuleUtil {
 		if(StringUtils.isBlank(rules)){
 			return ruleList;
 		}
-		String[] ruleArr = StringUtils.split(rules, "|");
+		String[] ruleArr = StringUtils.split(rules, "||");
 		for(String rule: ruleArr){
 			ruleList.add(StringUtils.split(rule, ":"));
 		}
